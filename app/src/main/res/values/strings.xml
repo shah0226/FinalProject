@@ -5,4 +5,8 @@
     <string name="titlesong">Song</string>
     <string name="enterartitlesong">Enter Title Song </string>
     <string name="searchbutton">Google Search</string>
+
+    <string name="result">Result</string>
+    <string name="search">Google Search</string>
+    <string name="type_here">Artist and song</string>
 </resources>
