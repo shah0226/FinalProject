@@ -3,6 +3,7 @@ package com.example.finalproject;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +24,7 @@ public class result_page extends AppCompatActivity {
     //private TextView artistName, titleSong, lyrics;
     private resultAdapter myAdapter;
     private ArrayList<Result> list = new ArrayList<>();
-    private Button btn, help;
+    private Button btn, helpBtn, gBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,27 +41,32 @@ public class result_page extends AppCompatActivity {
         //lyrics = findViewById(R.id.lyrics);
         progressBar = findViewById(R.id.progressBar);
 
-        help = findViewById(R.id.help);
-        /*btn.setOnClickListener(new View.OnClickListener() {
+        helpBtn = findViewById(R.id.help);
+        helpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View v) {
-                Toast.makeText(result_page.this, getResources().getString(R.string.toast_message) , Toast.LENGTH_LONG).show();
+                Toast.makeText(result_page.this, getResources().getString(R.string.toast_message2) , Toast.LENGTH_LONG).show();
             }
-        });*/
+        });
 
         btn = findViewById(R.id.checkBox);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View v) {
                 Toast.makeText(result_page.this, getResources().getString(R.string.toast_message) , Toast.LENGTH_LONG).show();
             }
         });
 
-        progressBar.setVisibility(View.VISIBLE);
+        gBtn = findViewById(R.id.googleSearch);
+        gBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //Intent goToGoogle = new Intent(result_page.this, GoogleActivity.class);
+               // startActivity(goToGoogle);
+            }
+        });
 
-
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
         class resultAdapter extends BaseAdapter {
