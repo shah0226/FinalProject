@@ -61,5 +61,11 @@
         android:nextFocusUp="@id/searchbutton"
         android:nextFocusRight="@id/searchbutton"
         android:nextFocusLeft="@id/searchbutton"/>
+
+    <Button
+        android:id="@+id/resultbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>
 
