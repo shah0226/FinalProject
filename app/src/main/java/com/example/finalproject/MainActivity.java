@@ -15,13 +15,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button logButton = findViewById(R.id.searchbutton);
+        Button logButton = findViewById(R.id.searchButton);
         logButton.setOnClickListener(click -> startactivitymethod());
 
     }
 
     private void startactivitymethod() {
-        Intent resultPage = new Intent(this, MainActivity.class);
+        Intent resultPage = new Intent(MainActivity.this, result_page.class);
         startActivity(resultPage);
     }
 

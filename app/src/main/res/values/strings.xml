@@ -4,8 +4,8 @@
     <string name="enterartistname">Enter Artist Name </string>
     <string name="titlesong">Song</string>
     <string name="enterartitlesong">Enter Title Song </string>
-    <string name="searchbutton">Google Search</string>
-    <string name="resultButton">Search Result</string>
+    <string name="searchButton">Search Result</string>
+
 
     <string name="result">Result</string>
     <string name="search">Google Search</string>
