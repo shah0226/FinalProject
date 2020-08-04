@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,14 +16,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button logButton = findViewById(R.id.searchButton);
-        logButton.setOnClickListener(click -> startactivitymethod());
+        TextView artistname = findViewById(R.id.enterartistname);
+        TextView titleSong = findViewById(R.id.enterartitlesong);
+        Button resultButton = findViewById(R.id.resultbutton);
+        resultButton.setOnClickListener(click -> {
+            Intent goToResult = new Intent(MainActivity.this, result_page.class);
+            goToResult.putExtra("InputArtist", artistname.getText().toString());
+            goToResult.putExtra("InputTitle", titleSong.getText().toString());
+            startActivity(goToResult);
+        });
 
     }
-
-    private void startactivitymethod() {
-        Intent resultPage = new Intent(MainActivity.this, result_page.class);
-        startActivity(resultPage);
-    }
-
 }
