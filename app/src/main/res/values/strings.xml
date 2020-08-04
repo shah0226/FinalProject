@@ -15,5 +15,7 @@
     <string name="toast_message">For more information, click on Google</string>
     <string name="toast_message2">This page is the search result. For more information, please click on Google</string>
 
-
+    <string name="go_to_website"> would you like to search for </string>
+    <string name="yes"> yes </string>
+    <string name="no"> no </string>
 </resources>

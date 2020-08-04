@@ -26,6 +26,9 @@ public class result_page extends AppCompatActivity {
     private ArrayList<Result> list = new ArrayList<>();
     private Button btn, helpBtn, gBtn;
 
+    public static final String ARTIST = "com.example.finalproject.artist";
+    public static final String SONG = "com.example.finalproject.song";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,68 +64,71 @@ public class result_page extends AppCompatActivity {
         gBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //Intent goToGoogle = new Intent(result_page.this, GoogleActivity.class);
-               // startActivity(goToGoogle);
+                Intent goToGoogle = new Intent(result_page.this, GoogleActivity.class);
+                goToGoogle.putExtra(ARTIST, list.toString().indexOf(1) );
+                goToGoogle.putExtra(SONG, list.toString().indexOf(1) );
+                startActivity(goToGoogle);
+
             }
         });
 
         progressBar.setVisibility(View.INVISIBLE);
     }
 
-        class resultAdapter extends BaseAdapter {
+    class resultAdapter extends BaseAdapter {
 
-            @Override
-            public int getCount() {
-                return list.size();
-            }
-
-            @Override
-            public Object getItem(int position) {
-                return null;
-            }
-
-            @Override
-            public long getItemId(int position) {
-                return 0;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                return null;
-            }
+        @Override
+        public int getCount() {
+            return list.size();
         }
 
-        class Result {
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
 
-            private String artistName, songTitle, lyrics;
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
 
-            public Result (String artistName, String songTitle, String lyrics){
-                this.artistName = artistName;
-                this.songTitle = songTitle;
-                this.lyrics = lyrics;
-            }
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return null;
+        }
+    }
 
-            public String getArtistName() { return artistName; }
+    class Result {
 
-            public void setArtistName(String artistName) {
+        private String artistName, songTitle, lyrics;
 
-            }
+        public Result (String artistName, String songTitle, String lyrics){
+            this.artistName = artistName;
+            this.songTitle = songTitle;
+            this.lyrics = lyrics;
+        }
 
-            public String getSongTitle() {return songTitle;}
+        public String getArtistName() { return artistName; }
 
-            public void setSongTitle(String songTitle){
-
-            }
-
-            public String getLyrics(){
-                return lyrics;
-            }
-
-            public void setLyrics(String lyrics){
-
-            }
+        public void setArtistName(String artistName) {
 
         }
+
+        public String getSongTitle() {return songTitle;}
+
+        public void setSongTitle(String songTitle){
+
+        }
+
+        public String getLyrics(){
+            return lyrics;
+        }
+
+        public void setLyrics(String lyrics){
+
+        }
+
+    }
 
 
 }
