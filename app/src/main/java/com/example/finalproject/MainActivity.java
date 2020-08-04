@@ -16,11 +16,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView artistname = findViewById(R.id.artistname);
+        TextView artistname = findViewById(R.id.enterartistname);
+        TextView titleSong = findViewById(R.id.enterartitlesong);
         Button resultButton = findViewById(R.id.resultbutton);
         resultButton.setOnClickListener(click -> {
             Intent goToResult = new Intent(MainActivity.this, result_page.class);
-            goToResult.putExtra("artistname", artistname.getText().toString());
+            goToResult.putExtra("InputArtist", artistname.getText().toString());
+            goToResult.putExtra("InputTitle", titleSong.getText().toString());
             startActivity(goToResult);
         });
 
