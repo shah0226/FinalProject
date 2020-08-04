@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView artistname = findViewById(R.id.enterartistname);
         TextView titleSong = findViewById(R.id.enterartitlesong);
-        Button resultButton = findViewById(R.id.resultbutton);
+        Button resultButton = findViewById(R.id.searchButton);
         resultButton.setOnClickListener(click -> {
             Intent goToResult = new Intent(MainActivity.this, result_page.class);
             goToResult.putExtra("InputArtist", artistname.getText().toString());
