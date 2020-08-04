@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -44,7 +45,7 @@ public class result_page extends AppCompatActivity {
     private TextView artistName, titleSong, lyrics;
     //private resultAdapter myAdapter;
    // private ArrayList<Result> list = new ArrayList<>();
-    private Button btn, helpBtn, gBtn;
+    private Button btn, saveBtn, gBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +53,36 @@ public class result_page extends AppCompatActivity {
         setContentView(R.layout.activity_result_page);
 
         //loadDataFromDatabase(); //get any previously saved Contact objects
-        helpBtn = findViewById(R.id.help);
-        helpBtn.setOnClickListener(new View.OnClickListener() {
+        saveBtn = findViewById(R.id.save);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(result_page.this, getResources().getString(R.string.toast_message2), Toast.LENGTH_LONG).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(result_page.this);
+                builder.setTitle("Select your answer.");
+                builder.setMessage("Do you want to save as favourite?");
+
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                Intent goToSaved = new Intent(result_page.this, FavouritesActivity.class);
+                                startActivity(goToSaved);
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                break;
+                        }
+                    }
+                };
+                builder.setPositiveButton("Yes", dialogClickListener);
+                builder.setNegativeButton("No", dialogClickListener);
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
+
+
 
         btn = findViewById(R.id.checkBox);
         btn.setOnClickListener(new View.OnClickListener() {
