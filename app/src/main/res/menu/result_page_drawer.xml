@@ -9,5 +9,11 @@
         android:icon="@drawable/help"
         app:showAsAction="always"
         android:orderInCategory="600"/>
+
+    <item
+        android:title="Donation"
+        android:id="@+id/donation"
+        app:showAsAction="always"
+        android:orderInCategory="600"/>
 </menu>
 

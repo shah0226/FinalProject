@@ -1,11 +1,9 @@
 package com.example.finalproject;
 
-import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,12 +49,10 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
 
     protected static final String ACTIVITY_NAME = "Result page";
     private ProgressBar progressBar;
-    private TextView artistNameView, titleInputView, titleSong, lyrics;
-    private ArrayList<SavedFavourite> elements = new ArrayList<>();
-    SQLiteDatabase db;
+    private TextView artistName, titleSong, lyrics;
+    //private resultAdapter myAdapter;
+   // private ArrayList<Result> list = new ArrayList<>();
     private Button btn, saveBtn;
-    protected String artistName;
-    protected String titleInput;
 
     public static final String ARTIST = "Artist";
     public static final String TITLE = "TITLE";
@@ -73,8 +69,8 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToFaves = new Intent(result_page.this, FavouritesActivity.class);
-                startActivity(goToFaves);
+               // Intent goToFaves = new Intent(result_page.this, FavouritesActivity.class);
+               // startActivity(goToFaves);
             }
 
         });
@@ -105,55 +101,18 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
 
 
         Intent fromMain = getIntent();
-        artistName = fromMain.getStringExtra("InputArtist");
+        String artistName = fromMain.getStringExtra("InputArtist");
         EditText resultArtist = findViewById(R.id.nameInput);
         resultArtist.setText(artistName);
 
-        titleInput = fromMain.getStringExtra("InputTitle");
+        String titleInput = fromMain.getStringExtra("InputTitle");
         EditText resultTitle = findViewById(R.id.titleInput);
         resultTitle.setText(titleInput);
 
-        if(resultArtist.getText().toString() != artistName && resultTitle.getText().toString() != titleInput) {
-            String lyricsURL = "https://api.lyrics.ovh/v1/" + artistName.replace(" ", "%20") + "/" +
-                    titleInput.replace("0", "%20");
-            ResultQuery ResultQuery = new ResultQuery();
-            ResultQuery.execute(lyricsURL);
-        }else{
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setMessage("You have entered invalid value");
-            alertDialogBuilder.setNegativeButton("Exit", (click,arg) -> {
-                Intent goHome = new Intent(result_page.this, MainActivity.class);
-                startActivity(goHome);
-            });
-
-            alertDialogBuilder.create().show();
-        }
-    }
-
-    private void loadDataFromDatabase() {
-
-        MyOpener dbOpener = new MyOpener(this);
-        db = dbOpener.getWritableDatabase(); // Calls onCreate() if you've never built the table before, onUpgrade if the version here is newer
-
-        String[] columns = {MyOpener.COL_ID, MyOpener.COL_ARTIST, MyOpener.COL_TITLE, MyOpener.COL_LYRICS};
-
-        Cursor results = db.query(false, MyOpener.TABLE_NAME, columns, null, null, null, null, null, null);
- //       printCursor(results, db.getVersion());
-
-        int idColIndex = results.getColumnIndex(MyOpener.COL_ID);
-        int artistColIndex = results.getColumnIndex(MyOpener.COL_ARTIST);
-        int titleColIndex = results.getColumnIndex(MyOpener.COL_TITLE);
-        int lyricsColIndex = results.getColumnIndex(MyOpener.COL_LYRICS);
-
-        while (results.moveToNext()) {
-            long id = results.getLong(idColIndex);
-            String artist = results.getString(artistColIndex);
-            String title = results.getString(titleColIndex);
-            String lyrics = results.getString(lyricsColIndex);
-
-            //add the new Song to the array list:
-            elements.add(new SavedFavourite(artist, title, lyrics, id));
-        }
+        String lyricsURL = "https://api.lyrics.ovh/v1/"+titleInput+"/"+artistName;
+        ResultQuery ResultQuery = new ResultQuery();
+        ResultQuery.execute(lyricsURL);
+        //progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -161,13 +120,25 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
         //Look at your menu XML file. Put a case for every id in that file:
         switch (item.getItemId()) {
             //what to do when the menu item is selected:
-
-            case R.id.help:
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setMessage("Click back to the main page. Click Favourite to save a song to Favourites.");
-                alertDialogBuilder.setNegativeButton("Exit", null);
-                alertDialogBuilder.create().show();
+            case R.id.item1:
+                Intent goHome = new Intent(result_page.this, MainActivity.class);
+                startActivity(goHome);
                 break;
+            /*case R.id.item2:
+                Intent gotoFav = new Intent(result_page.this, Fav.class);
+                startActivity(gotoFav);
+                break;
+            case R.id.item3:
+                Intent gotoGoogle = new Intent(result_page.this, GoogleAvtivity.class);
+                startActivity(gotoGoogle);
+                break;*/
+
+            case R.id.item4:
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Click Favourite to save a song to Favourites. \n Click on icon, you can go to other page");
+                alertDialogBuilder.setNegativeButton("Exit", null);
+                break;
+
         }
         return true;
     }
@@ -176,13 +147,32 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         String message2 = null;
+        LayoutInflater li = LayoutInflater.from(getApplicationContext());
+        View promptsView = li.inflate(R.layout.prompts, null);
+        final EditText userInput = (EditText) promptsView.findViewById(R.id.etUserInput);
+
         switch(item.getItemId())
         {
-
             case R.id.help:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setMessage("Click back to the main page. Click Favourite to save a song to Favourites.");
+
                 alertDialogBuilder.setNegativeButton("Exit", null);
+                alertDialogBuilder.create().show();
+                break;
+
+            case R.id.donation:
+                alertDialogBuilder = new AlertDialog.Builder(this);
+
+                alertDialogBuilder.setMessage("Donation: Please give generously.\n How much money do you want to donate?");
+                alertDialogBuilder.setView(promptsView);
+                alertDialogBuilder.setPositiveButton("THANK YOU", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "Entered: "+userInput.getText().toString(), Toast.LENGTH_LONG).show();
+                    }
+                });
+                alertDialogBuilder.setNegativeButton("CANCEL", null);
                 alertDialogBuilder.create().show();
                 break;
         }
@@ -212,6 +202,7 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
                         }
 
                         String result = sb.toString();
+                        Log.i("result" , result);
                         //convert string to JSON
                         JSONObject jObject = new JSONObject(result);
                         //get the double associated with "value"
@@ -236,18 +227,6 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
                 super.onPostExecute(fromDoInBackground);
                 TextView lyrics = findViewById(R.id.lyrics);
                 lyrics.setText(String.format("Lyrics: %s", lyr));
-                ContentValues newRowValues = new ContentValues();
-
-                loadDataFromDatabase();
-
-                newRowValues.put(MyOpener.COL_ARTIST, artistName);
-                newRowValues.put(MyOpener.COL_TITLE, titleInput);
-                newRowValues.put(MyOpener.COL_LYRICS, lyr);
-
-                long newId = db.insert(MyOpener.TABLE_NAME, null, newRowValues);
-
-                SavedFavourite favourite = new SavedFavourite(artistName, titleInput, lyr, newId);
-                elements.add(favourite);
                // progressBar.setVisibility(View.INVISIBLE);
             }
         }
