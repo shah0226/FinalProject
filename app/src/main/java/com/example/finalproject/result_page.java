@@ -51,12 +51,12 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
 
     protected static final String ACTIVITY_NAME = "Result page";
     private ProgressBar progressBar;
-    private TextView artistName, titleSong, lyrics;
+    private TextView artistNameView, titleInputView, titleSong, lyrics;
     private ArrayList<SavedFavourite> elements = new ArrayList<>();
     SQLiteDatabase db;
     private Button btn, saveBtn;
-    protected String artist;
-    protected String title;
+    protected String artistName;
+    protected String titleInput;
 
     public static final String ARTIST = "Artist";
     public static final String TITLE = "TITLE";
@@ -105,16 +105,17 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
 
 
         Intent fromMain = getIntent();
-        String artistName = fromMain.getStringExtra("InputArtist");
+        artistName = fromMain.getStringExtra("InputArtist");
         EditText resultArtist = findViewById(R.id.nameInput);
         resultArtist.setText(artistName);
 
-        String titleInput = fromMain.getStringExtra("InputTitle");
+        titleInput = fromMain.getStringExtra("InputTitle");
         EditText resultTitle = findViewById(R.id.titleInput);
         resultTitle.setText(titleInput);
 
-        if("resultArtist" == "artistName" && "resultTitle" == "titleInput") {
-            String lyricsURL = "https://api.lyrics.ovh/v1/" + artistName + "/" + titleInput;
+        if(resultArtist.getText().toString() != artistName && resultTitle.getText().toString() != titleInput) {
+            String lyricsURL = "https://api.lyrics.ovh/v1/" + artistName.replace(" ", "%20") + "/" +
+                    titleInput.replace("0", "%20");
             ResultQuery ResultQuery = new ResultQuery();
             ResultQuery.execute(lyricsURL);
         }else{
@@ -235,18 +236,17 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
                 super.onPostExecute(fromDoInBackground);
                 TextView lyrics = findViewById(R.id.lyrics);
                 lyrics.setText(String.format("Lyrics: %s", lyr));
-                title = fromDoInBackground;
                 ContentValues newRowValues = new ContentValues();
 
                 loadDataFromDatabase();
 
-                newRowValues.put(MyOpener.COL_ARTIST, artist);
-                newRowValues.put(MyOpener.COL_TITLE, title);
+                newRowValues.put(MyOpener.COL_ARTIST, artistName);
+                newRowValues.put(MyOpener.COL_TITLE, titleInput);
                 newRowValues.put(MyOpener.COL_LYRICS, lyr);
 
                 long newId = db.insert(MyOpener.TABLE_NAME, null, newRowValues);
 
-                SavedFavourite favourite = new SavedFavourite(artist, title, lyr, newId);
+                SavedFavourite favourite = new SavedFavourite(artistName, titleInput, lyr, newId);
                 elements.add(favourite);
                // progressBar.setVisibility(View.INVISIBLE);
             }
