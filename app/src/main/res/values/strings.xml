@@ -33,11 +33,22 @@
     <string name="favouritesHelpButton">Help</string>
     <string name="favouritesInstructionsBody">- Click on a song in the list to see its lyrics.\n- Search for a song title or artist in the search window.\n- Long press a song to delete it from the list.</string>
     <string name="favouritesInstructionsTitle">Instructions for this page:</string>
-    <string name="foundOneSong">Found one song.</string>
-    <string name="foundManySongs1">"Found "</string>
-    <string name="foundManySongs2">" songs."</string>
+    <string name="favouritesFoundOneSong">Found one song.</string>
+    <string name="favouritesFoundManySongs1">"Found "</string>
+    <string name="favouritesFoundManySongs2">" songs."</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="version">Version 1.0</string>
+    <string name="favouritesVersion">Version 1.0</string>
+    <string name="favouritesAboutProject">About Project</string>
+    <string name="favouritesWhatIsMusic">Music</string>
+    <string name="favouritesMusicDefinition">Webster\'s dictionary defines music as vocal, instrumental, or mechanical sounds having rhythm, melody, or harmony.</string>
+    <string name="favouritesDonate">Would you like to donate $10 to fund this project?</string>
+    <string name="favouritesThankYou">Thank you!</string>
+    <string name="favouritesThatsOK">That\'s OK!</string>
+    <string name="favouritesMusicDefinitionTitle">What is music?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="favouritesDonateTitle">Donate?</string>
+
 
 </resources>

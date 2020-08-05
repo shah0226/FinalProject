@@ -174,19 +174,74 @@ public class FavouritesActivity extends AppCompatActivity implements NavigationV
         switch(item.getItemId())
         {
             //what to do when the menu item is selected:
-            case R.id.help_item:
+            case R.id.whatIsMusic:
+                musicDialog();
+                break;
+
+            case R.id.donateItem:
+                donateDialog();
+                break;
+
+            case R.id.helpItem:
                 helpDialog();
                 break;
         }
         return true;
     }
 
+    @Override
+    public boolean onNavigationItemSelected( MenuItem item) {
+
+        String message = null;
+
+        switch(item.getItemId())
+        {
+            case R.id.whatIsMusic:
+                musicDialog();
+                break;
+
+            case R.id.donateItem:
+                donateDialog();
+                break;
+
+            case R.id.helpItem:
+                helpDialog();
+                break;
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        return false;
+    }
+
+
     public void helpDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle(getResources().getString(R.string.favouritesInstructionsTitle))
                 .setMessage(getResources().getString(R.string.favouritesInstructionsBody))
-                .setPositiveButton("OK", (click, arg) -> {}).create().show();;
+                .setPositiveButton("OK", (click, arg) -> {}).create().show();
     }
+
+    public void musicDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle(getResources().getString(R.string.favouritesMusicDefinitionTitle))
+                .setMessage(getResources().getString(R.string.favouritesMusicDefinition))
+                .setPositiveButton("OK", (click, arg) -> {}).create().show();
+    }
+
+    public void donateDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle(getResources().getString(R.string.favouritesDonateTitle))
+                .setMessage(getResources().getString(R.string.favouritesDonate))
+                .setPositiveButton(getResources().getString(R.string.yes), (click, arg) -> {
+                    Toast.makeText(this, getResources().getString(R.string.favouritesThankYou), Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton(getResources().getString(R.string.no), (click, arg) -> {
+                    Toast.makeText(this, getResources().getString(R.string.favouritesThatsOK), Toast.LENGTH_SHORT).show();
+                }).create().show();
+    }
+
 
     private void loadDataFromDatabase(boolean searching, String searchTerm) {
         //get a database connection"
@@ -223,29 +278,10 @@ public class FavouritesActivity extends AppCompatActivity implements NavigationV
         }
 
         if (elements.size() == 1)
-            Toast.makeText(this, getResources().getString(R.string.foundOneSong), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.favouritesFoundOneSong), Toast.LENGTH_SHORT).show();
         else
-            Toast.makeText(this, getResources().getString(R.string.foundManySongs1) + elements.size() + getResources().getString(R.string.foundManySongs2), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.favouritesFoundManySongs1) + elements.size() + getResources().getString(R.string.favouritesFoundManySongs2), Toast.LENGTH_SHORT).show();
     }
-
-    @Override
-    public boolean onNavigationItemSelected( MenuItem item) {
-
-        String message = null;
-
-        switch(item.getItemId())
-        {
-            case R.id.help_item:
-                helpDialog();
-                break;
-        }
-
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        drawerLayout.closeDrawer(GravityCompat.START);
-
-        return false;
-    }
-
 
     class MyListAdapter extends BaseAdapter implements ListAdapter {
 
