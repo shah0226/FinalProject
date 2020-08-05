@@ -52,8 +52,6 @@ public class resultToolbar extends AppCompatActivity implements NavigationView.O
         //Look at your menu XML file. Put a case for every id in that file:
         switch (item.getItemId()) {
             //what to do when the menu item is selected:
-
-
             case R.id.help:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Click a title to view the details. Click Favourite with option note, to save a song to Favourites.");
@@ -73,9 +71,10 @@ public class resultToolbar extends AppCompatActivity implements NavigationView.O
                 alertDialogBuilder.setNegativeButton("Exit", null);
                 break;
         }
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         DrawerLayout drawerLayout = findViewById(R.id.drawer);
         drawerLayout.closeDrawer(GravityCompat.START);
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+
         return false;
     }
 

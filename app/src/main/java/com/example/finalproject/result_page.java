@@ -113,10 +113,20 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
         EditText resultTitle = findViewById(R.id.titleInput);
         resultTitle.setText(titleInput);
 
-        String lyricsURL = "https://api.lyrics.ovh/v1/"+titleInput+"/"+artistName;
-        ResultQuery ResultQuery = new ResultQuery();
-        ResultQuery.execute(lyricsURL);
-        //progressBar.setVisibility(View.VISIBLE);
+        if("resultArtist" == "artistName" && "resultTitle" == "titleInput") {
+            String lyricsURL = "https://api.lyrics.ovh/v1/" + artistName + "/" + titleInput;
+            ResultQuery ResultQuery = new ResultQuery();
+            ResultQuery.execute(lyricsURL);
+        }else{
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setMessage("You have entered invalid value");
+            alertDialogBuilder.setNegativeButton("Exit", (click,arg) -> {
+                Intent goHome = new Intent(result_page.this, MainActivity.class);
+                startActivity(goHome);
+            });
+
+            alertDialogBuilder.create().show();
+        }
     }
 
     private void loadDataFromDatabase() {
@@ -127,7 +137,7 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
         String[] columns = {MyOpener.COL_ID, MyOpener.COL_ARTIST, MyOpener.COL_TITLE, MyOpener.COL_LYRICS};
 
         Cursor results = db.query(false, MyOpener.TABLE_NAME, columns, null, null, null, null, null, null);
-//        printCursor(results, db.getVersion());
+ //       printCursor(results, db.getVersion());
 
         int idColIndex = results.getColumnIndex(MyOpener.COL_ID);
         int artistColIndex = results.getColumnIndex(MyOpener.COL_ARTIST);
@@ -168,7 +178,6 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
         switch(item.getItemId())
         {
 
-
             case R.id.help:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setMessage("Click back to the main page. Click Favourite to save a song to Favourites.");
@@ -202,7 +211,6 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
                         }
 
                         String result = sb.toString();
-                        Log.i("result" , result);
                         //convert string to JSON
                         JSONObject jObject = new JSONObject(result);
                         //get the double associated with "value"
