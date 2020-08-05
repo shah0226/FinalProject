@@ -18,5 +18,10 @@
     <string name="close">close</string>
     <string name="NRVbackbtn">Back</string>
 
+    <string name="item1" />
+    <string name="item2" />
+    <string name="item3" />
+    <string name="item4" />
+
 
 </resources>

@@ -49,15 +49,28 @@ public class resultToolbar extends AppCompatActivity implements NavigationView.O
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent = null;
         //Look at your menu XML file. Put a case for every id in that file:
         switch (item.getItemId()) {
+
             //what to do when the menu item is selected:
+            case R.id.item1:
+                Intent goHome = new Intent(resultToolbar.this, MainActivity.class);
+                startActivity(goHome);
+                break;
+            /*case R.id.item2:
+                Intent gotoFav = new Intent(result_page.this, Fav.class);
+                startActivity(gotoFav);
+                break;
+            case R.id.item3:
+                Intent gotoGoogle = new Intent(result_page.this, GoogleAvtivity.class);
+                startActivity(gotoGoogle);
+                break;*/
 
-
-            case R.id.help:
+            case R.id.item4:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setTitle("Click a title to view the details. Click Favourite with option note, to save a song to Favourites.");
-                alertDialogBuilder.setNegativeButton("Close", null);
+                alertDialogBuilder.setTitle("Click Favourite to save a song to Favourites. \n Click on icon, you can go to other page");
+                alertDialogBuilder.setNegativeButton("Exit", null);
                 break;
         }
         return true;
@@ -66,11 +79,19 @@ public class resultToolbar extends AppCompatActivity implements NavigationView.O
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         String message = null;
+        AlertDialog.Builder alertDialogBuilder;
         switch(item.getItemId())
         {
             case R.id.help:
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setNegativeButton("Exit", null);
+                break;
+
+            case R.id.donation:
+                alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setMessage("Donation: Please give generously.");
+                alertDialogBuilder.setPositiveButton("THANK YOU", null);
+                alertDialogBuilder.setNegativeButton("CANCEL", null);
                 break;
         }
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();

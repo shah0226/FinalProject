@@ -1,6 +1,7 @@
 package com.example.finalproject;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -119,13 +120,25 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
         //Look at your menu XML file. Put a case for every id in that file:
         switch (item.getItemId()) {
             //what to do when the menu item is selected:
-
-            case R.id.help:
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setMessage("Click back to the main page. Click Favourite to save a song to Favourites.");
-                alertDialogBuilder.setNegativeButton("Exit", null);
-                alertDialogBuilder.create().show();
+            case R.id.item1:
+                Intent goHome = new Intent(result_page.this, MainActivity.class);
+                startActivity(goHome);
                 break;
+            /*case R.id.item2:
+                Intent gotoFav = new Intent(result_page.this, Fav.class);
+                startActivity(gotoFav);
+                break;
+            case R.id.item3:
+                Intent gotoGoogle = new Intent(result_page.this, GoogleAvtivity.class);
+                startActivity(gotoGoogle);
+                break;*/
+
+            case R.id.item4:
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Click Favourite to save a song to Favourites. \n Click on icon, you can go to other page");
+                alertDialogBuilder.setNegativeButton("Exit", null);
+                break;
+
         }
         return true;
     }
@@ -134,14 +147,32 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         String message2 = null;
+        LayoutInflater li = LayoutInflater.from(getApplicationContext());
+        View promptsView = li.inflate(R.layout.prompts, null);
+        final EditText userInput = (EditText) promptsView.findViewById(R.id.etUserInput);
+
         switch(item.getItemId())
         {
-
-
             case R.id.help:
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setMessage("Click back to the main page. Click Favourite to save a song to Favourites.");
+
                 alertDialogBuilder.setNegativeButton("Exit", null);
+                alertDialogBuilder.create().show();
+                break;
+
+            case R.id.donation:
+                alertDialogBuilder = new AlertDialog.Builder(this);
+
+                alertDialogBuilder.setMessage("Donation: Please give generously.\n How much money do you want to donate?");
+                alertDialogBuilder.setView(promptsView);
+                alertDialogBuilder.setPositiveButton("THANK YOU", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "Entered: "+userInput.getText().toString(), Toast.LENGTH_LONG).show();
+                    }
+                });
+                alertDialogBuilder.setNegativeButton("CANCEL", null);
                 alertDialogBuilder.create().show();
                 break;
         }

@@ -2,20 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:title="Home"
-        android:id="@+id/home"
+    <item android:id="@+id/item1"
+        android:title="@string/item1"
         android:icon="@drawable/home"
         android:orderInCategory="100"
-        app:showAsAction="always"/>  <!-- This uses showAsAction=always, so look at icon= parameter -->
+        app:showAsAction="ifRoom" />
 
+    <item android:id="@+id/item2"
+        android:title="@string/item2"
+        android:icon="@drawable/plus"
+        android:orderInCategory="200"
+        app:showAsAction="ifRoom"/>
 
+    <item android:id="@+id/item3"
+        android:title="@string/item3"
+        android:icon="@drawable/search"
+        android:orderInCategory="300"
+        app:showAsAction="ifRoom"/>
 
-    <item
-        android:title="Help"
-        android:id="@+id/help"
+    <item android:id="@+id/item4"
+        android:title="@string/item4"
         android:icon="@drawable/help"
-        app:showAsAction="never"
-        android:orderInCategory="400"/> <!-- This uses showAsAction=never, so look at title= parameter -->>
+        android:orderInCategory="300"
+        app:showAsAction="ifRoom"/>
 
 </menu>

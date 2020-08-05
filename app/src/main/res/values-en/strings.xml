@@ -18,4 +18,10 @@
     <string name="toast_message">For more information, click on Google</string>
     <string name="toast_message2">This page is the search result. For more information, please click on Google</string>
     <string name="NRVbackbtn">Back</string>
+
+
+    <string name="item1" />
+    <string name="item2" />
+    <string name="item3" />
+    <string name="item4" />
 </resources>
