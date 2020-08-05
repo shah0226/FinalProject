@@ -6,10 +6,11 @@ public class SavedFavourite {
     private String title;
     private String lyrics;
 
-    SavedFavourite(String artist, String title, String lyrics) {
+    SavedFavourite(String artist, String title, String lyrics, long id) {
         this.artist = artist;
         this.title = title;
         this.lyrics = lyrics;
+        this.id = id;
     }
 
     public long getId() { return id; }

@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/artist_song" />
 
+
     <Button
         android:id="@+id/no"
         android:text="@string/no"
@@ -30,7 +31,5 @@
         android:id="@+id/fragmentLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-
 
 </RelativeLayout>
