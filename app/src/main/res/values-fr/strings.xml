@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fragmentButton">CACHER</string>
+    <string name="savedFavourites">Chansons Favories</string>
+    <string name="author">Auteur: Yury Berestetsky</string>
+    <string name="favouritesSearch">"Chercher: "</string>
+    <string name="searchHint">Écrivez ici...</string>
+    <string name="favouritesSearchButton">MARCHE</string>
+    <string name="favouritesSnackbarString">Rien a chercher. Voici toutes les chansons</string>
+    <string name="lastSearch">"Dernière recherche: "</string>
+    <string name="favouritesDeleteQuestion">Voulez-vous effacer cette chanson?</string>
+    <string name="favouritesDeleteArtist">"Artiste: "</string>
+    <string name="favouritesDeleteSong">"Chanson: "</string>
+    <string name="favouritesDeleteYes">Oui</string>
+    <string name="favouritesDeleteNo">Non</string>
+    <string name="favouritesHelpButton">AIDE</string>
+    <string name="favouritesInstructionsBody">- Cliquez une chanson dans la liste pour voir ses paroles.\n- Cherchez le nom d\'une chanson ou d\'un auteur à l\'haut de la page.\n- Cliquez et tenez une chanson pour l\'effacer.</string>
+    <string name="favouritesInstructionsTitle">Instructions pour cette page:</string>
+    <string name="foundOneSong">Il y a une chanson.</string>
+    <string name="foundManySongs1">"Il y a "</string>
+    <string name="foundManySongs2">" chansons"</string>
+</resources>
