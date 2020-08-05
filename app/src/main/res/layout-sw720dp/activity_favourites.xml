@@ -43,7 +43,7 @@
                 android:id="@+id/version"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:text="@string/version"
+                android:text="@string/favouritesVersion"
                 android:textSize="16dp"
                 android:textAlignment="center"
                 android:layout_below="@id/author"/>
