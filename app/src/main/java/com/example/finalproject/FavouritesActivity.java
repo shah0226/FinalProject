@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -175,7 +176,6 @@ public class FavouritesActivity extends AppCompatActivity implements NavigationV
         {
             //what to do when the menu item is selected:
             case R.id.whatIsMusic:
-                musicDialog();
                 break;
 
             case R.id.donateItem:
@@ -196,16 +196,17 @@ public class FavouritesActivity extends AppCompatActivity implements NavigationV
 
         switch(item.getItemId())
         {
-            case R.id.whatIsMusic:
-                musicDialog();
-                break;
-
             case R.id.donateItem:
                 donateDialog();
                 break;
 
             case R.id.helpItem:
                 helpDialog();
+                break;
+
+            case R.id.aboutProject:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://lyricsovh.docs.apiary.io/"));
+                startActivity(browserIntent);
                 break;
         }
 
@@ -223,12 +224,6 @@ public class FavouritesActivity extends AppCompatActivity implements NavigationV
                 .setPositiveButton("OK", (click, arg) -> {}).create().show();
     }
 
-    public void musicDialog() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle(getResources().getString(R.string.favouritesMusicDefinitionTitle))
-                .setMessage(getResources().getString(R.string.favouritesMusicDefinition))
-                .setPositiveButton("OK", (click, arg) -> {}).create().show();
-    }
 
     public void donateDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
