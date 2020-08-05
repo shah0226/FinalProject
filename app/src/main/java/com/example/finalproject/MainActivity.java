@@ -63,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
         toSavedFavourites.setOnClickListener(click -> {
             Intent nextPage = new Intent(this, FavouritesActivity.class);
-            nextPage.putExtra("Artist", artistName.getText().toString());
-            nextPage.putExtra("Title", songTitle.getText().toString());
             startActivity(nextPage);
         });
 
