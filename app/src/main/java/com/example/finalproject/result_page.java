@@ -1,14 +1,15 @@
 package com.example.finalproject;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,7 +20,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONException;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
+
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -29,22 +38,25 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static org.xmlpull.v1.XmlPullParser.START_TAG;
 
-public class result_page extends AppCompatActivity {
+public class result_page extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     protected static final String ACTIVITY_NAME = "Result page";
     private ProgressBar progressBar;
     private TextView artistName, titleSong, lyrics;
     //private resultAdapter myAdapter;
    // private ArrayList<Result> list = new ArrayList<>();
-    private Button btn, helpBtn, gBtn;
+    private Button btn, saveBtn;
+
+    public static final String ARTIST = "Artist";
+    public static final String TITLE = "TITLE";
+    public static final String LYRICS = "LYRICS";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,30 +64,40 @@ public class result_page extends AppCompatActivity {
         setContentView(R.layout.activity_result_page);
 
         //loadDataFromDatabase(); //get any previously saved Contact objects
-        helpBtn = findViewById(R.id.help);
-        helpBtn.setOnClickListener(new View.OnClickListener() {
+        saveBtn = findViewById(R.id.goToFaveList);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(result_page.this, getResources().getString(R.string.toast_message2), Toast.LENGTH_LONG).show();
+               // Intent goToFaves = new Intent(result_page.this, FavouritesActivity.class);
+               // startActivity(goToFaves);
             }
+
         });
 
-        btn = findViewById(R.id.checkBox);
+        btn = findViewById(R.id.backToMain);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(result_page.this, getResources().getString(R.string.toast_message), Toast.LENGTH_LONG).show();
+                Intent goHome = new Intent(result_page.this, MainActivity.class);
+                startActivity(goHome);
             }
         });
 
-        gBtn = findViewById(R.id.googleSearch);
-        gBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent goToGoogle = new Intent(result_page.this, GoogleActivity.class);
-                // startActivity(goToGoogle);
-            }
-        });
+        //toolbar
+        Toolbar myToolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(myToolbar);
+
+        //NavigationDrawer
+        DrawerLayout drawer = findViewById(R.id.drawer);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                drawer, myToolbar, R.string.open, R.string.close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setItemIconTintList(null);
+        navigationView.setNavigationItemSelectedListener(this);
+
 
         Intent fromMain = getIntent();
         String artistName = fromMain.getStringExtra("InputArtist");
@@ -87,11 +109,49 @@ public class result_page extends AppCompatActivity {
         resultTitle.setText(titleInput);
 
         String lyricsURL = "https://api.lyrics.ovh/v1/"+titleInput+"/"+artistName;
-        ForecastQuery forecastQuery = new ForecastQuery();
-        forecastQuery.execute(lyricsURL);
+        ResultQuery ResultQuery = new ResultQuery();
+        ResultQuery.execute(lyricsURL);
         //progressBar.setVisibility(View.VISIBLE);
     }
-        private class ForecastQuery extends AsyncTask<String, Integer, String>{
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //Look at your menu XML file. Put a case for every id in that file:
+        switch (item.getItemId()) {
+            //what to do when the menu item is selected:
+
+            case R.id.help:
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setMessage("Click back to the main page. Click Favourite to save a song to Favourites.");
+                alertDialogBuilder.setNegativeButton("Exit", null);
+                alertDialogBuilder.create().show();
+                break;
+        }
+        return true;
+    }
+
+    // Needed for the OnNavigationItemSelected interface:
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        String message2 = null;
+        switch(item.getItemId())
+        {
+
+
+            case R.id.help:
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setMessage("Click back to the main page. Click Favourite to save a song to Favourites.");
+                alertDialogBuilder.setNegativeButton("Exit", null);
+                alertDialogBuilder.create().show();
+                break;
+        }
+        Toast.makeText(this, message2, Toast.LENGTH_LONG).show();
+        DrawerLayout drawerLayout = findViewById(R.id.drawer);
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return false;
+    }
+
+    private class ResultQuery extends AsyncTask<String, Integer, String>{
             private String lyr;
 
             @Override

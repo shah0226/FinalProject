@@ -50,21 +50,27 @@
         android:nextFocusUp="@id/enterartitlesong"
         android:nextFocusRight="@id/enterartitlesong"
         android:nextFocusLeft="@id/enterartitlesong"/>
+
     <Button
-        android:id="@+id/searchbutton"
+        android:id="@+id/searchButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/searchbutton"
-        android:nextFocusDown="@id/searchbutton"
-        android:nextFocusUp="@id/searchbutton"
-        android:nextFocusRight="@id/searchbutton"
-        android:nextFocusLeft="@id/searchbutton"/>
+        android:nextFocusDown="@id/searchButton"
+        android:nextFocusUp="@id/searchButton"
+        android:nextFocusRight="@id/searchButton"
+        android:nextFocusLeft="@id/searchButton"/>
 
     <Button
-        android:id="@+id/resultbutton"
+        android:id="@+id/searchAPIButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/resultButton"/>
+        android:text="Search API"/>
+
+    <Button
+        android:id="@+id/savedFavouritesButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="To Saved Favourites" />
 
 </LinearLayout>
-

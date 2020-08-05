@@ -1,179 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".result_page">
 
-    <LinearLayout
-        android:id="@+id/layout1"
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.1"
+        app:title="Search Result" />
 
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="40dp"
-            android:text="@string/result" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout2"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_below="@+id/layout1"
-        android:layout_weight="0.2"
-        android:gravity="fill"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        tools:openDrawer="start" >
 
-        <CheckBox
-            android:id="@+id/checkBox"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:text="@string/check_message" />
+            android:layout_height="match_parent" >
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/artistName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ArtistName"
+                android:textSize="20dp"/>
+
+            <EditText
+                android:id="@+id/nameInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/artistName"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="189dp"
+                android:editable="false"
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/titleSong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/artistName"
+                android:text="TitleSong"
+                android:textSize="20dp"/>
 
 
-    <LinearLayout
-        android:id="@+id/layout3"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_below="@+id/layout2"
-        android:layout_weight="0.1"
-        android:gravity="fill"
-        android:orientation="horizontal">
+            <EditText
+                android:id="@+id/titleInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nameInput"
+                android:layout_alignRight="@id/titleSong"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="-21dp"
+                android:layout_marginRight="219dp"
+                android:editable="false"
+                android:textSize="15dp" />
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
+            <ScrollView
+                android:id="@+id/subsScroll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleSong"
+                android:layout_alignParentRight="false"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp">
+
+
+                <TextView
+                    android:id="@+id/lyrics"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical"
+                    android:text="Lyrics" />
+
+            </ScrollView>
+
+
+            <Button
+                android:id="@+id/backToMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:text="@string/NRVbackbtn"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/goToFaveList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:text="@string/saveFav"
+                android:textAllCaps="false" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <ListView
+                android:id="@+id/newsList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/backToMain"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                >
+            </ListView>
+
+        </RelativeLayout>
+
+        <com.google.android.material.navigation.NavigationView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:max="100"
-            android:progress="18"
-            android:visibility="invisible" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/result_header"
+            app:menu="@menu/result_page_drawer"
+            android:id="@+id/nav_view"/>
 
-    <LinearLayout
-        android:id="@+id/layout4"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_below="@+id/layout3"
-        android:layout_weight="0.2"
-        android:gravity="fill"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/help"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/help" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout5"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:layout_below="@+id/layout4"
-        android:layout_weight="0.2"
-        android:gravity="fill"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/googleSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:text="@string/search" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout6"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_below="@+id/layout5"
-        android:layout_weight="0.1"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/artistName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ArtistName" />
-
-        <EditText
-            android:id="@+id/nameInput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="13dp"
-            android:editable="false" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout7"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_below="@+id/layout6"
-        android:layout_weight="0.1"
-        android:orientation="horizontal"
-     >
-
-
-        <TextView
-            android:id="@+id/titleSong"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TitleSong" />
-
-        <EditText
-            android:id="@+id/titleInput"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:editable="false"
-            android:textSize="13dp"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/layout8"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@+id/layout7"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:layout_marginTop="2dp"
-        android:scrollbars="vertical">
-
-        <ScrollView
-            android:id="@+id/subsScroll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginStart="15dp">
-
-
-        <TextView
-            android:id="@+id/lyrics"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            android:text="Lyrics" />
-
-        </ScrollView>
-
-    </LinearLayout>
-
-</LinearLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
+</RelativeLayout>
