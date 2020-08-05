@@ -24,4 +24,7 @@
     <string name="foundOneSong">Found one song.</string>
     <string name="foundManySongs1">"Found "</string>
     <string name="foundManySongs2">" songs."</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="version">Version 1.0</string>
 </resources>

@@ -29,7 +29,6 @@ import java.util.concurrent.ExecutionException;
 public class DetailsFragment extends Fragment {
 
     TextView albumTextView;
-    ProgressBar progressBar;
     private Bundle dataFromActivity;
     private long id;
     private String artist;

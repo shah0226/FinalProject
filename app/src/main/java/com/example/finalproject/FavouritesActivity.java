@@ -1,14 +1,16 @@
 package com.example.finalproject;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,7 +19,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
@@ -28,13 +29,13 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.navigation.NavigationView;
 
-public class FavouritesActivity extends AppCompatActivity {
+public class FavouritesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String ACTIVITY_NAME = "FAVOURITES_ACTIVITY";
 
@@ -55,12 +56,28 @@ public class FavouritesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
 
+        //Getting the last performed search back as a hint
         prefs = getSharedPreferences("Last Lookup", Context.MODE_PRIVATE);
         String savedString = prefs.getString("Last Lookup", "");
         EditText favouritesSearchInput = findViewById(R.id.favouritesSearch);
         favouritesSearchInput.setHint(getResources().getString(R.string.lastSearch) + savedString);
 
 
+        //Toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+                drawerLayout, toolbar, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
+        //Show list of songs
         ListView myList = findViewById(R.id.myListView);
         boolean isTablet = findViewById(R.id.fragmentLocation) != null; //check if the FrameLayout is loaded
 
@@ -69,7 +86,6 @@ public class FavouritesActivity extends AppCompatActivity {
         myAdapter = new MyListAdapter();
         myList.setAdapter( myAdapter);
 
-        //Old way of doing the search
 
         Button favouritesSearchButton = findViewById(R.id.favouritesSearchButton);
         favouritesSearchButton.setOnClickListener(click -> {
@@ -84,6 +100,7 @@ public class FavouritesActivity extends AppCompatActivity {
                 loadDataFromDatabase(true, searchTerm);
                 myAdapter.notifyDataSetChanged();
             } else {
+                //Nothing was typed in
                 Snackbar.make(favouritesSearchButton, getResources().getString(R.string.favouritesSnackbarString), Snackbar.LENGTH_SHORT).show();
                 loadDataFromDatabase(false, null);
                 myAdapter.notifyDataSetChanged();
@@ -134,9 +151,6 @@ public class FavouritesActivity extends AppCompatActivity {
 
             return true;
         });
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
     }
 
     private void saveSharedPrefs(String stringToSave) {
@@ -161,13 +175,17 @@ public class FavouritesActivity extends AppCompatActivity {
         {
             //what to do when the menu item is selected:
             case R.id.help_item:
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setTitle(getResources().getString(R.string.favouritesInstructionsTitle))
-                        .setMessage(getResources().getString(R.string.favouritesInstructionsBody))
-                        .setPositiveButton("OK", (click, arg) -> {}).create().show();;
+                helpDialog();
                 break;
         }
         return true;
+    }
+
+    public void helpDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle(getResources().getString(R.string.favouritesInstructionsTitle))
+                .setMessage(getResources().getString(R.string.favouritesInstructionsBody))
+                .setPositiveButton("OK", (click, arg) -> {}).create().show();;
     }
 
     private void loadDataFromDatabase(boolean searching, String searchTerm) {
@@ -209,6 +227,25 @@ public class FavouritesActivity extends AppCompatActivity {
         else
             Toast.makeText(this, getResources().getString(R.string.foundManySongs1) + elements.size() + getResources().getString(R.string.foundManySongs2), Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public boolean onNavigationItemSelected( MenuItem item) {
+
+        String message = null;
+
+        switch(item.getItemId())
+        {
+            case R.id.help_item:
+                helpDialog();
+                break;
+        }
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        return false;
+    }
+
 
     class MyListAdapter extends BaseAdapter implements ListAdapter {
 
