@@ -19,6 +19,7 @@ import android.os.Bundle;
 public class resultToolbar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     Toolbar tbar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

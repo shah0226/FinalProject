@@ -15,11 +15,6 @@ import android.widget.Toolbar;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.net.URL;
-
-import static com.example.finalproject.result_page.ARTIST;
-import static com.example.finalproject.result_page.SONG;
-
 public class GoogleActivity extends AppCompatActivity {
      Button yes = findViewById(R.id.yes);
      Button no = findViewById(R.id.no);
@@ -39,10 +34,9 @@ public class GoogleActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        int random = 1;
         MenuInflater inflator = getMenuInflater();
-        inflator.inflate(R.layout.menu, menu);
-
-
+        inflator.inflate(random, menu);
         return true;
     }
 
