@@ -19,4 +19,5 @@
     <string name="foundOneSong">Il y a une chanson.</string>
     <string name="foundManySongs1">"Il y a "</string>
     <string name="foundManySongs2">" chansons"</string>
+
 </resources>
