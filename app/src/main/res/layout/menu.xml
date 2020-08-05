@@ -7,19 +7,19 @@
 
     <item android:id="@+id/choice1"
         android:title=""
-        android:icon="@drawable/freeicon"
+        android:icon="@drawable/faves_page"
         android:orderInCategory="100"
         app:showAsAction="always" />
 
     <item android:id="@+id/choice2"
         android:title=""
-        android:icon="@drawable/freeicon"
+        android:icon="@drawable/result"
         android:orderInCategory="100"
         app:showAsAction="always" />
 
     <item android:id="@+id/choice3"
         android:title=""
-        android:icon="@drawable/freeicon"
+        android:icon="@drawable/saved_faves"
         android:orderInCategory="100"
         app:showAsAction="always" />
 

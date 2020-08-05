@@ -44,17 +44,19 @@ public class GoogleActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         String message = null;
         //Look at your menu XML file. Put a case for every id in that file:
+
         switch(item.getItemId())
         {
             //what to do when the menu item is selected:
             case R.id.choice1:
-                message = "You clicked choice 1";
+                Intent favesact = new Intent(GoogleActivity.this, FavouritesActivity.class);
+                startActivity(favesact);
                 break;
             case R.id.choice2:
-                message = "You clicked choice 2";
+                Intent resu = new Intent(GoogleActivity.this, result_page.class);
                 break;
             case R.id.choice3:
-                message = "You clicked on help";
+               Intent savfav = new Intent(GoogleActivity.this, result_page.class);
                 break;
             case R.id.aboutproject:
                 Toast.makeText(this,"this is the google activity written by Robert  Nix", Toast.LENGTH_LONG);
