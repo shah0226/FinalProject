@@ -1,8 +1,11 @@
 package com.example.finalproject;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,9 +52,11 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
     protected static final String ACTIVITY_NAME = "Result page";
     private ProgressBar progressBar;
     private TextView artistName, titleSong, lyrics;
-    //private resultAdapter myAdapter;
-   // private ArrayList<Result> list = new ArrayList<>();
+    private ArrayList<SavedFavourite> elements = new ArrayList<>();
+    SQLiteDatabase db;
     private Button btn, saveBtn;
+    protected String artist;
+    protected String title;
 
     public static final String ARTIST = "Artist";
     public static final String TITLE = "TITLE";
@@ -112,6 +117,32 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
         ResultQuery ResultQuery = new ResultQuery();
         ResultQuery.execute(lyricsURL);
         //progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void loadDataFromDatabase() {
+
+        MyOpener dbOpener = new MyOpener(this);
+        db = dbOpener.getWritableDatabase(); // Calls onCreate() if you've never built the table before, onUpgrade if the version here is newer
+
+        String[] columns = {MyOpener.COL_ID, MyOpener.COL_ARTIST, MyOpener.COL_TITLE, MyOpener.COL_LYRICS};
+
+        Cursor results = db.query(false, MyOpener.TABLE_NAME, columns, null, null, null, null, null, null);
+//        printCursor(results, db.getVersion());
+
+        int idColIndex = results.getColumnIndex(MyOpener.COL_ID);
+        int artistColIndex = results.getColumnIndex(MyOpener.COL_ARTIST);
+        int titleColIndex = results.getColumnIndex(MyOpener.COL_TITLE);
+        int lyricsColIndex = results.getColumnIndex(MyOpener.COL_LYRICS);
+
+        while (results.moveToNext()) {
+            long id = results.getLong(idColIndex);
+            String artist = results.getString(artistColIndex);
+            String title = results.getString(titleColIndex);
+            String lyrics = results.getString(lyricsColIndex);
+
+            //add the new Song to the array list:
+            elements.add(new SavedFavourite(artist, title, lyrics, id));
+        }
     }
 
     @Override
@@ -196,6 +227,19 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
                 super.onPostExecute(fromDoInBackground);
                 TextView lyrics = findViewById(R.id.lyrics);
                 lyrics.setText(String.format("Lyrics: %s", lyr));
+                title = fromDoInBackground;
+                ContentValues newRowValues = new ContentValues();
+
+                loadDataFromDatabase();
+
+                newRowValues.put(MyOpener.COL_ARTIST, artist);
+                newRowValues.put(MyOpener.COL_TITLE, title);
+                newRowValues.put(MyOpener.COL_LYRICS, lyr);
+
+                long newId = db.insert(MyOpener.TABLE_NAME, null, newRowValues);
+
+                SavedFavourite favourite = new SavedFavourite(artist, title, lyr, newId);
+                elements.add(favourite);
                // progressBar.setVisibility(View.INVISIBLE);
             }
         }

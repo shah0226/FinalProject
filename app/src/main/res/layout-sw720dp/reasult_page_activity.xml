@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".result_page"
+    tools:ignore="MissingDefaultResource">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Search Result" />
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        tools:openDrawer="start" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/artistName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ArtistName"
+                android:textSize="40dp"/>
+
+            <EditText
+                android:id="@+id/nameInput"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_alignRight="@id/artistName"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="750dp"
+                android:editable="false"
+                android:textSize="40dp" />
+
+            <TextView
+                android:id="@+id/titleSong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/artistName"
+                android:text="TitleSong"
+                android:textSize="40dp"/>
+
+
+            <EditText
+                android:id="@+id/titleInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nameInput"
+                android:layout_alignRight="@id/titleSong"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="-21dp"
+                android:layout_marginRight="750dp"
+                android:editable="false"
+                android:textSize="40dp" />
+
+            <ScrollView
+                android:id="@+id/subsScroll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleSong"
+                android:layout_alignParentRight="false"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="10dp">
+
+
+                <TextView
+                    android:id="@+id/lyrics"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical"
+                    android:text="Lyrics"
+                    android:textSize="40dp"/>
+
+            </ScrollView>
+
+
+            <Button
+                android:id="@+id/backToMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:text="@string/NRVbackbtn"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/goToFaveList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:text="@string/saveFav"
+                android:textAllCaps="false" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+            <ListView
+                android:id="@+id/newsList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/backToMain"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                >
+            </ListView>
+
+            <FrameLayout
+                android:id="@+id/fragmentLocation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/backToMain" />
+
+
+        </RelativeLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/result_header"
+            app:menu="@menu/result_page_drawer"
+            android:id="@+id/nav_view"/>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</RelativeLayout>
