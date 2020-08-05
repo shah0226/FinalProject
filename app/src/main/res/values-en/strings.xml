@@ -14,4 +14,6 @@
     <string name="check_message">check for more information</string>
     <string name="toast_message">For more information, click on Google</string>
     <string name="toast_message2">This page is the search result. For more information, please click on Google</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
