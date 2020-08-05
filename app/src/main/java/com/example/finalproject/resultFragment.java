@@ -70,8 +70,6 @@ public class resultFragment extends Fragment {
         Button faveBtn = result.findViewById(R.id.buttonFave);
         faveBtn.setOnClickListener(clk -> {
 
-
-
         });
 
         // get the back button, and add a click listener to finish and go back to the list of titles
