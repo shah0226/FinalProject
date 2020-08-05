@@ -7,6 +7,8 @@
     <string name="enterartitlesong">Enter Title Song </string>
     <string name="searchbutton">Google Search</string>
     <string name="resultButton">Search Result</string>
+    <string name="saveFav">Save to Favourite</string>
+    <string name="NRVbackbtn">Back</string>
 
     <string name="result">Result</string>
     <string name="search">Google Search</string>
@@ -15,4 +17,7 @@
     <string name="check_message">check for more information</string>
     <string name="toast_message">For more information, click on Google</string>
     <string name="toast_message2">This page is the search result. For more information, please click on Google</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+
 </resources>

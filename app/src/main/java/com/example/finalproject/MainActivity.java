@@ -71,15 +71,10 @@ public class MainActivity extends AppCompatActivity {
 
         Button searchAPIButton = findViewById(R.id.searchAPIButton);
         searchAPIButton.setOnClickListener(lb -> {
-            artist = artistName.getText().toString();
-            title = songTitle.getText().toString();
-
-            SongQuery req = new SongQuery();
-            loadDataFromDatabase();
-            String url = "https://api.lyrics.ovh/v1/" +
-                    artist.replace(" ", "%20") + "/" +
-                    title.replace(" ", "%20");
-            req.execute(url);
+            Intent goToResult = new Intent(MainActivity.this, result_page.class);
+            goToResult.putExtra("InputArtist", artistname.getText().toString());
+            goToResult.putExtra("InputTitle", titleSong.getText().toString());
+            startActivity(goToResult);
         });
     }
 

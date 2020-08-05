@@ -68,8 +68,8 @@ public class result_page extends AppCompatActivity implements NavigationView.OnN
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Intent goToFaves = new Intent(result_page.this, FavouritesActivity.class);
-               // startActivity(goToFaves);
+                Intent goToFaves = new Intent(result_page.this, FavouritesActivity.class);
+                startActivity(goToFaves);
             }
 
         });
