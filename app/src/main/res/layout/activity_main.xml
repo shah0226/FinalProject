@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical">
-
-    >
-
 
     <TextView
         android:id="@+id/app_name"
@@ -52,11 +48,27 @@
         android:nextFocusUp="@id/enterartitlesong"
         android:nextFocusRight="@id/enterartitlesong"
         android:nextFocusLeft="@id/enterartitlesong"/>
+
+    <Button
+        android:id="@+id/searchAPIButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search API"/>
+
     <Button
         android:id="@+id/searchbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/searchbutton"
+        android:nextFocusDown="@id/searchbutton"
+        android:nextFocusUp="@id/searchbutton"
+        android:nextFocusRight="@id/searchbutton"
+        android:nextFocusLeft="@id/searchbutton"/>
+    <Button
+        android:id="@+id/savedFavouritesButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="To Saved Favourites"
         android:nextFocusDown="@id/searchbutton"
         android:nextFocusUp="@id/searchbutton"
         android:nextFocusRight="@id/searchbutton"

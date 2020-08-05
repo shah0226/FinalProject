@@ -5,4 +5,23 @@
     <string name="titlesong">Song</string>
     <string name="enterartitlesong">Enter Title Song </string>
     <string name="searchbutton">Google Search</string>
+    <string name="fragmentButton">HIDE</string>
+    <string name="savedFavourites">Saved Favourites</string>
+    <string name="author">Author: Yury Berestetsky</string>
+    <string name="favouritesSearch">"Search: "</string>
+    <string name="searchHint">Type here...</string>
+    <string name="favouritesSearchButton">GO</string>
+    <string name="favouritesSnackbarString">No search term entered. Showing whole list.</string>
+    <string name="lastSearch">"Last search: "</string>
+    <string name="favouritesDeleteQuestion">Do you want to delete this?</string>
+    <string name="favouritesDeleteArtist">"Artist: "</string>
+    <string name="favouritesDeleteSong">"Song: "</string>
+    <string name="favouritesDeleteYes">Yes</string>
+    <string name="favouritesDeleteNo">No</string>
+    <string name="favouritesHelpButton">Help</string>
+    <string name="favouritesInstructionsBody">- Click on a song in the list to see its lyrics.\n- Search for a song title or artist in the search window.\n- Long press a song to delete it from the list.</string>
+    <string name="favouritesInstructionsTitle">Instructions for this page:</string>
+    <string name="foundOneSong">Found one song.</string>
+    <string name="foundManySongs1">"Found "</string>
+    <string name="foundManySongs2">" songs."</string>
 </resources>
